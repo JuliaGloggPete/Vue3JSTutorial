@@ -1,13 +1,33 @@
 <template>
 <h1>{{title}}</h1>
 <p>Welcome ... </p>
-<div v-if="showModal">
+<teleport to=".modals" v-if="showModal">
 
-  <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
+  <Modal theme="sale" @close="toggleModal" >
+<template v-slot:links>
+<a href="#">sign up now</a>
+<a href="#">more info</a>
+
+</template>
+<h1>Julia</h1>
+<p>start to focus now</p>
+
+</Modal>
+</teleport>
+<div v-if="showModalTwo">
+<Modal theme="heart" @close="toggleModalTwo">
+
+
+
+
+  <h1>Something </h1>
+
+
+</Modal>
 </div>
 
-<button @click.shift="toggleModal" >open modal</button>
-
+<button @click="toggleModal" >open modal</button>
+<button @click="toggleModalTwo" >open modal 2</button>
 
 </template>
 
@@ -21,9 +41,8 @@ export default {
   data(){
     return{
       title:'NetNinja Tutorial',
-      header: 'Sign up for the Giveaway!',
-      text: 'Grab your ninja swag for half price',
-      showModal: false
+      showModal: false,
+      showModalTwo: false
 
     }
   },
@@ -31,6 +50,9 @@ export default {
   methods:{
     toggleModal(){
       this.showModal = !this.showModal
+    },
+    toggleModalTwo(){
+      this.showModalTwo = !this.showModalTwo
     }
   }
 
